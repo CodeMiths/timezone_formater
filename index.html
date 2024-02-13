@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Include moment.js and moment-timezone.js -->
+    <!-- <script src="node_modules/moment/moment.js"></script>
+    <script src="node_modules/moment-timezone/builds/moment-timezone-with-data.js"></script> -->
+    <script src="dist/moment.js"></script>
+    <script src="dist/moment-timezone-with-data.min.js"></script>
+</head>
+<body>
+    <!-- Paragraph to display the current time -->
+    <p id="currentTime"></p>
+
+    <!-- Button to copy the time to the clipboard -->
+    <button onclick="copyToClipboard()">Copy Time to Clipboard</button>
+
+    <script>
+        // Set the default timezone to Beirut
+        moment.tz.setDefault("Asia/Beirut");
+        // Get the current time
+        const currentTime = moment().format("HH:mm:ss [GMT]Z (z)");
+        // Display the current time in the paragraph
+        document.getElementById('currentTime').textContent = currentTime;
+
+        // Function to copy the current time to the clipboard
+        function copyToClipboard() {
+            const el = document.createElement('textarea');
+            el.value = currentTime;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            alert('Time copied to clipboard!');
+        }
+    </script>
+</body>
+</html>
